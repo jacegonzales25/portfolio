@@ -9,8 +9,11 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: "hsl(var(--primary))",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        border: "var(--border)",
+        hover: "var(--hover)",
       },
     },
   },
