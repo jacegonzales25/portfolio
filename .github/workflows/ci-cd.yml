@@ -7,6 +7,21 @@ on:
   pull_request:
     branches:
       - main
+env:
+    AWS_REGION: MY_AWS_REGION                   # set this to your preferred AWS region, e.g. us-west-1
+    ECR_REPOSITORY: MY_ECR_REPOSITORY           # set this to your Amazon ECR repository name
+    ECS_SERVICE: MY_ECS_SERVICE                 # set this to your Amazon ECS service name
+    ECS_CLUSTER: MY_ECS_CLUSTER                 # set this to your Amazon ECS cluster name
+    ECS_TASK_DEFINITION: MY_ECS_TASK_DEFINITION # set this to the path to your Amazon ECS task definition                                           # file, e.g. .aws/task-definition.json
+    CONTAINER_NAME: MY_CONTAINER_NAME           # set this to the name of the container in the
+                                                # containerDefinitions section of your task definition
+    DOCKER_USERNAME: MY_DOCKER_USERNAME         # set this to your Docker Hub username
+    DOCKER_PASSWORD: MY_DOCKER_PASSWORD         # set this to your Docker Hub password  
+    AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY}}
+
+permissions:                                                  
+  contents: read
 
 jobs:
   build-and-test:
@@ -49,13 +64,6 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/portfolio-app:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/portfolio-app:latest
 
-    #   - name: Deploy to Vercel (if using Vercel)
-    #     run: |
-    #       npm install -g vercel
-    #       vercel --prod
-    #     env:
-    #       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-    
       - name: Deploy to ECS (if using AWS ECS)
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
