@@ -1,82 +1,57 @@
-import Image from "next/image"
-import { Github, ExternalLink } from "lucide-react"
+import { Folder, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
-type Project = {
+type Certification = {
   title: string
+  issuer: string
   description: string
-  image: string
-  technologies: string[]
-  githubLink: string
-  externalLink: string
+  date: string
+  link: string
 }
 
-const projects: Project[] = [
+const certifications: Certification[] = [
   {
-    title: "Halcyon Theme",
+    title: "Certified Kubernetes Application Developer",
+    issuer: "Cloud Native Computing Foundation (CNCF)",
     description:
-      "A minimal, dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Available on Visual Studio Marketplace, Package Control, Atom Package Manager, and npm.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-X450rnpkGWHoLBEgdykq1vjwDlLXPC.png",
-    technologies: ["VS Code", "Sublime Text", "Atom", "iTerm2", "Hyper"],
-    githubLink: "#",
-    externalLink: "#",
+      "Demonstrates expertise in designing, building, and deploying cloud-native applications using Kubernetes.",
+    date: "June 2023",
+    link: "https://www.cncf.io/certification/ckad/",
   },
   {
-    title: "Spotify Profile",
-    description:
-      "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-SYh0cx469PazG9SiQkMUunp0oGgzDa.png",
-    technologies: ["React", "Express", "Spotify API", "Heroku"],
-    githubLink: "#",
-    externalLink: "#",
+    title: "AWS Certified Solutions Architect - Associate",
+    issuer: "Amazon Web Services (AWS)",
+    description: "Proves competency in designing and deploying scalable and reliable applications on AWS.",
+    date: "March 2022",
+    link: "https://aws.amazon.com/certification/certified-solutions-architect/",
   },
+  // Add more certifications here...
 ]
 
-export function Projects() {
+export function Certifications() {
   return (
-    <section id="work" className="py-20 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold text-gray-200 mb-8">
+    <section className="py-20 max-w-4xl mx-auto">
+      <h2 className="text-center text-3xl font-bold text-gray-200 mb-8 animate-fade-up">
         <span className="text-primary font-mono text-xl mr-2">03.</span>
-        Some Things I've Built
+        Professional Certifications
       </h2>
-      <div className="space-y-24">
-        {projects.map((project, index) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {certifications.map((cert, index) => (
           <div
-            key={project.title}
-            className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-4`}
+            key={cert.title}
+            className="bg-secondary/50 rounded-lg p-6 hover:-translate-y-2 transition-transform duration-200 animate-fade-up"
+            style={{ animationDelay: `${(index + 1) * 100}ms` }}
           >
-            <div className="md:w-1/2 relative">
-              <Image
-                src={project.image || "/placeholder.svg"}
-                alt={project.title}
-                width={500}
-                height={300}
-                className="rounded-lg"
-              />
-              <div className="absolute inset-0 bg-primary/20 hover:bg-transparent transition-colors duration-300"></div>
+            <div className="flex justify-between items-start mb-4">
+              <Folder className="h-10 w-10 text-primary" />
+              <Link href={cert.link} className="text-muted-foreground hover:text-primary">
+                <ExternalLink className="h-5 w-5" />
+              </Link>
             </div>
-            <div className={`md:w-1/2 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-              <p className="text-primary font-mono mb-2">Featured Project</p>
-              <h3 className="text-2xl font-bold mb-4">{project.title}</h3>
-              <div className="bg-secondary p-6 rounded-lg mb-4">
-                <p>{project.description}</p>
-              </div>
-              <ul className={`flex flex-wrap gap-2 mb-4 ${index % 2 === 0 ? "justify-end" : "justify-start"}`}>
-                {project.technologies.map((tech) => (
-                  <li key={tech} className="text-sm text-gray-400">
-                    {tech}
-                  </li>
-                ))}
-              </ul>
-              <div className={`flex gap-4 ${index % 2 === 0 ? "justify-end" : "justify-start"}`}>
-                <Link href={project.githubLink} className="text-gray-400 hover:text-primary">
-                  <Github className="h-5 w-5" />
-                </Link>
-                <Link href={project.externalLink} className="text-gray-400 hover:text-primary">
-                  <ExternalLink className="h-5 w-5" />
-                </Link>
-              </div>
-            </div>
+            <h3 className="text-xl font-semibold mb-2">{cert.title}</h3>
+            <p className="text-primary mb-2">{cert.issuer}</p>
+            <p className="text-muted-foreground text-sm mb-4">{cert.description}</p>
+            <p className="text-sm text-muted-foreground">{cert.date}</p>
           </div>
         ))}
       </div>

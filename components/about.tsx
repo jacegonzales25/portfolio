@@ -1,52 +1,47 @@
-// import Image from "next/image"
+import Image from "next/image";
+import { TechCarousel } from "./tech-carousel";
 
 export function About() {
-  const technologies = [
-    "JavaScript (ES6+)",
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Express",
-    "Next.js",
-    "Tailwind CSS",
-    "Python",
-  ]
-
   return (
     <section id="about" className="py-20 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold text-gray-200 mb-4">
+      <h2 className="text-3xl font-bold mb-8">
         <span className="text-primary font-mono text-xl mr-2">01.</span>
         About Me
       </h2>
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="md:w-2/3">
-          <p className="mb-4">
-            Hello! My name is [Your Name], and I enjoy creating things that live on the internet. My interest in web
-            development started back in 2012 when I decided to try editing custom Tumblr themes — turns out hacking
-            together a custom reblog button taught me a lot about HTML & CSS!
+      <div className="flex flex-col md:flex-row gap-12">
+        <div className="md:w-2/3 space-y-4">
+          <p>
+            Hello! I`&apos;`m a Cloud Engineer and DevOps specialist passionate about
+            building and automating scalable infrastructure. My journey in tech
+            started with web development and evolved into cloud architecture and
+            automation.
           </p>
-          <p className="mb-4">
-            Fast-forward to today, and I&aposve had the privilege of working at an advertising agency, a start-up, a huge
-            corporation, and a student-led design studio. My main focus these days is building accessible, inclusive
-            products and digital experiences at [Your Current Company/Project] for a variety of clients.
+          <p>
+            Today, I specialize in designing and implementing cloud solutions,
+            with a focus on AWS services, containerization, and Infrastructure
+            as Code. I`&apos;`m particularly interested in creating efficient CI/CD
+            pipelines and automated deployment processes.
           </p>
-          <p className="mb-4">Here are a few technologies I&aposve been working with recently:</p>
-          <ul className="grid grid-cols-2 gap-2 text-sm">
-            {technologies.map((tech, index) => (
-              <li key={index} className="flex items-center">
-                <span className="text-primary mr-2">▹</span> {tech}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-12">
+            <h3 className="text-xl font-bold mb-6">Technical Skills</h3>
+            <TechCarousel />
+          </div>
         </div>
-        <div className="md:w-1/3 flex justify-center">
-          <div className="relative w-60 h-60">
-            {/* <Image src={"/"} alt="Profile picture" fill className="rounded object-cover" /> */}
-            <div className="absolute inset-0 border-2 border-primary rounded translate-x-5 translate-y-5 -z-10"></div>
+        <div className="md:w-1/3">
+          <div className="relative group">
+            <div className="relative z-10 bg-secondary rounded">
+              <Image
+                src="/placeholder.svg"
+                alt="Profile"
+                width={300}
+                height={300}
+                className="rounded grayscale hover:grayscale-0 transition-all"
+              />
+            </div>
+            <div className="absolute inset-0 border-2 border-primary rounded translate-x-5 translate-y-5 -z-10 group-hover:translate-x-4 group-hover:translate-y-4 transition-transform"></div>
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }
-

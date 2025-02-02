@@ -5,6 +5,14 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 
+const navItems = [
+  { name: "About", number: "01", href: "#about" },
+  { name: "Experience", number: "02", href: "#experience" },
+  { name: "Projects", number: "03", href: "#projects" },
+  { name: "Certifications", number: "04", href: "#certifications" },
+  { name: "Contact", number: "05", href: "#contact" },
+]
+
 export function Nav() {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -17,18 +25,11 @@ export function Nav() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <Link href="#about" className="nav-link" data-number="01.">
-            About
-          </Link>
-          <Link href="#experience" className="nav-link" data-number="02.">
-            Experience
-          </Link>
-          <Link href="#work" className="nav-link" data-number="03.">
-            Work
-          </Link>
-          <Link href="#contact" className="nav-link" data-number="04.">
-            Contact
-          </Link>
+          {navItems.map((item) => (
+            <Link key={item.name} href={item.href} className="nav-link" data-number={item.number + "."}>
+              {item.name}
+            </Link>
+          ))}
           <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
             Resume
           </Button>
@@ -42,18 +43,17 @@ export function Nav() {
         {isOpen && (
           <div className="absolute top-full left-0 w-full p-4 bg-background/95 backdrop-blur-sm md:hidden">
             <div className="flex flex-col items-center gap-4">
-              <Link href="#about" className="nav-link" data-number="01." onClick={() => setIsOpen(false)}>
-                About
-              </Link>
-              <Link href="#experience" className="nav-link" data-number="02." onClick={() => setIsOpen(false)}>
-                Experience
-              </Link>
-              <Link href="#work" className="nav-link" data-number="03." onClick={() => setIsOpen(false)}>
-                Work
-              </Link>
-              <Link href="#contact" className="nav-link" data-number="04." onClick={() => setIsOpen(false)}>
-                Contact
-              </Link>
+              {navItems.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="nav-link"
+                  data-number={item.number + "."}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.name}
+                </Link>
+              ))}
               <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
                 Resume
               </Button>

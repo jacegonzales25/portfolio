@@ -5,10 +5,4 @@ const nextConfig: NextConfig = {
 };
 
 
-module.exports = {
-  reactStrictMode: true,
-  images: {
-    domains: ['example.com'],
-  },
-}
 export default nextConfig;

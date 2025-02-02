@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
 
 type Job = {
   company: string
@@ -12,27 +13,28 @@ type Job = {
 
 const jobs: Job[] = [
   {
-    company: "Upstatement",
-    title: "Lead Engineer",
-    date: "May 2018 - Present",
+    company: "Example Corp",
+    title: "Senior Cloud Engineer",
+    date: "January 2022 - Present",
     responsibilities: [
-      "Deliver high-quality, robust production code for a diverse array of projects for clients including Harvard Business School, Everytown for Gun Safety, Pratt Institute, Koala Health, Vanderbilt University, The 19th News, and more",
-      "Work alongside creative directors to lead the research, development, and architecture of technical solutions to fulfill business requirements",
-      "Collaborate with designers, project managers, and other engineers to transform creative concepts into production realities for clients and stakeholders",
-      "Provide leadership within engineering department through close collaboration, knowledge shares, and mentorship",
+      "Architected and implemented scalable cloud infrastructure using AWS services",
+      "Developed and maintained CI/CD pipelines using GitHub Actions and AWS CodePipeline",
+      "Implemented Infrastructure as Code using Terraform for multiple projects",
+      "Optimized cloud costs, resulting in a 30% reduction in monthly AWS expenses",
     ],
   },
   {
-    company: "Apple",
-    title: "UI Engineer Co-op",
-    date: "July - December 2017",
+    company: "Tech Innovators",
+    title: "DevOps Engineer",
+    date: "June 2019 - December 2021",
     responsibilities: [
-      "Developed and styled interactive web applications for Apple Music using Ember and SCSS",
-      "Built and shipped the Apple Music Extension for Facebook Messenger leveraging third-party and internal APIs",
-      "Architected and implemented the user interface of Apple Music's embeddable web player widget for in-browser user authorization and full song playback",
-      "Contributed extensively to MusicKit.js, a JavaScript framework that allows developers to add an Apple Music player to their web applications",
+      "Managed and optimized Kubernetes clusters on EKS",
+      "Implemented monitoring and alerting systems using AWS CloudWatch and Grafana",
+      "Automated deployment processes, reducing deployment time by 50%",
+      "Collaborated with development teams to improve application performance and reliability",
     ],
   },
+  // Add more job experiences as needed
 ]
 
 export function Experience() {
@@ -40,27 +42,36 @@ export function Experience() {
 
   return (
     <section id="experience" className="py-20 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold text-gray-200 mb-4">
+      <h2 className="text-3xl font-bold mb-8">
         <span className="text-primary font-mono text-xl mr-2">02.</span>
-        Where I&aposve Worked
+        Where I&apos;ve Worked
       </h2>
       <div className="flex flex-col md:flex-row gap-4">
-        <div className="md:w-1/4">
+        <div className="md:w-1/4 relative">
           {jobs.map((job, index) => (
             <Button
               key={job.company}
               variant={activeJobIndex === index ? "secondary" : "ghost"}
-              className="w-full justify-start"
+              className="w-full justify-start mb-2"
               onClick={() => setActiveJobIndex(index)}
             >
               {job.company}
             </Button>
           ))}
+          <motion.div
+            className="absolute left-0 w-1 bg-primary rounded"
+            initial={{ top: 0, height: 0 }}
+            animate={{
+              top: `${activeJobIndex * 40}px`,
+              height: "40px",
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          />
         </div>
         <div className="md:w-3/4">
           <h3 className="text-xl font-semibold">{jobs[activeJobIndex].title}</h3>
           <p className="text-primary mb-4">{jobs[activeJobIndex].company}</p>
-          <p className="text-sm text-gray-400 mb-4">{jobs[activeJobIndex].date}</p>
+          <p className="text-sm text-muted-foreground mb-4">{jobs[activeJobIndex].date}</p>
           <ul className="space-y-4">
             {jobs[activeJobIndex].responsibilities.map((responsibility, index) => (
               <li key={index} className="flex">
