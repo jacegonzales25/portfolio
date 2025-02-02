@@ -1,4 +1,4 @@
-import Image from "next/image"
+// import Image from "next/image"
 import { Github, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
@@ -46,13 +46,13 @@ export function Projects() {
             className={`flex flex-col ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} gap-4`}
           >
             <div className="md:w-1/2 relative">
-              <Image
-                src={project.image || "/placeholder.svg"}
+              {/* <Image
+                src={project.image || ""}
                 alt={project.title}
                 width={500}
                 height={300}
                 className="rounded-lg"
-              />
+              /> */}
               <div className="absolute inset-0 bg-primary/20 hover:bg-transparent transition-colors duration-300"></div>
             </div>
             <div className={`md:w-1/2 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>

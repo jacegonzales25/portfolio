@@ -1,4 +1,4 @@
-import Image from "next/image"
+// import Image from "next/image"
 
 export function About() {
   const technologies = [
@@ -41,7 +41,7 @@ export function About() {
         </div>
         <div className="md:w-1/3 flex justify-center">
           <div className="relative w-60 h-60">
-            <Image src="/placeholder.svg" alt="Profile picture" fill className="rounded object-cover" />
+            {/* <Image src={"/"} alt="Profile picture" fill className="rounded object-cover" /> */}
             <div className="absolute inset-0 border-2 border-primary rounded translate-x-5 translate-y-5 -z-10"></div>
           </div>
         </div>
