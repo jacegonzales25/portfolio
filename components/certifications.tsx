@@ -31,7 +31,7 @@ const certifications: Certification[] = [
 export function Certifications() {
   return (
     <section className="py-20 max-w-4xl mx-auto">
-      <h2 className="text-center text-3xl font-bold text-gray-200 mb-8 animate-fade-up">
+      <h2 className="text-center text-3xl font-bold text-gray-600 mb-8 animate-fade-up">
         <span className="text-primary font-mono text-xl mr-2">04.</span>
         Professional Certifications
       </h2>
@@ -48,7 +48,7 @@ export function Certifications() {
                 <ExternalLink className="h-5 w-5" />
               </Link>
             </div>
-            <h3 className="text-xl font-semibold mb-2">{cert.title}</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-400">{cert.title}</h3>
             <p className="text-primary mb-2">{cert.issuer}</p>
             <p className="text-muted-foreground text-sm mb-4">{cert.description}</p>
             <p className="text-sm text-muted-foreground">{cert.date}</p>
