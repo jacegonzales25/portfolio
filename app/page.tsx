@@ -29,6 +29,9 @@ export default function Home() {
         <Experience />
         <Projects />
       </div>
+      <section>
+        Portofolio inspired by brittanychiang.com
+      </section>
     </main>
   )
 }

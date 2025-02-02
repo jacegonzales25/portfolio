@@ -42,7 +42,7 @@ export function Experience() {
     <section id="experience" className="py-20 max-w-4xl mx-auto">
       <h2 className="text-3xl font-bold text-gray-200 mb-4">
         <span className="text-primary font-mono text-xl mr-2">02.</span>
-        Where I've Worked
+        Where I&aposve Worked
       </h2>
       <div className="flex flex-col md:flex-row gap-4">
         <div className="md:w-1/4">
