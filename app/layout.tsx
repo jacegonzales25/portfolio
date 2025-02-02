@@ -6,8 +6,8 @@ import type React from "react" // Import React
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Your Portfolio",
-  description: "Personal portfolio showcasing your work and experience",
+  title: "Jace L. Gonzales",
+  description: "Jace L. Gonzales' portfolio",
 }
 
 export default function RootLayout({
