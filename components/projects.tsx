@@ -37,7 +37,7 @@ export function Projects() {
     <section id="work" className="py-20 max-w-4xl mx-auto">
       <h2 className="text-3xl font-bold text-gray-200 mb-8">
         <span className="text-primary font-mono text-xl mr-2">03.</span>
-        Some Things I've Built
+        Some Things I&aposve Built
       </h2>
       <div className="space-y-24">
         {projects.map((project, index) => (
