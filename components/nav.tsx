@@ -20,7 +20,7 @@ export function Nav() {
     <header className="fixed w-full top-0 z-50 bg-background/80 backdrop-blur-sm">
       <nav className="flex items-center justify-between p-4 max-w-7xl mx-auto">
         <Link href="/" className="text-primary font-bold text-2xl">
-          YP
+          JLG
         </Link>
 
         {/* Desktop Navigation */}

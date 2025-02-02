@@ -5,6 +5,7 @@ import { About } from "@/components/about"
 import { Experience } from "@/components/experience"
 import { Certifications } from "@/components/certifications"
 import { Contact } from "@/components/contact"
+import { Projects } from "@/components/projects"
 
 export default function Home() {
   return (
@@ -38,6 +39,7 @@ export default function Home() {
         </section>
         <About />
         <Experience />
+        <Projects />
         <Certifications />
         <Contact />
       </div>

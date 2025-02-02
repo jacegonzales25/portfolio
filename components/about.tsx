@@ -4,26 +4,26 @@ import { TechCarousel } from "./tech-carousel";
 export function About() {
   return (
     <section id="about" className="py-20 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8">
+      <h2 className="text-3xl font-bold mb-8 text-gray-600">
         <span className="text-primary font-mono text-xl mr-2">01.</span>
         About Me
       </h2>
       <div className="flex flex-col md:flex-row gap-12">
         <div className="md:w-2/3 space-y-4">
-          <p>
-            Hello! I`&apos;`m a Cloud Engineer and DevOps specialist passionate about
+          <p className="text-gray-600">
+            Hello! I&apos;m a Cloud Engineer and DevOps specialist passionate about
             building and automating scalable infrastructure. My journey in tech
             started with web development and evolved into cloud architecture and
             automation.
           </p>
-          <p>
+          <p className="text-gray-600">
             Today, I specialize in designing and implementing cloud solutions,
             with a focus on AWS services, containerization, and Infrastructure
             as Code. I`&apos;`m particularly interested in creating efficient CI/CD
             pipelines and automated deployment processes.
           </p>
           <div className="mt-12">
-            <h3 className="text-xl font-bold mb-6">Technical Skills</h3>
+            <h3 className="text-xl font-bold mb-6 text-gray-600">Technical Skills</h3>
             <TechCarousel />
           </div>
         </div>

@@ -32,7 +32,7 @@ export function Certifications() {
   return (
     <section className="py-20 max-w-4xl mx-auto">
       <h2 className="text-center text-3xl font-bold text-gray-200 mb-8 animate-fade-up">
-        <span className="text-primary font-mono text-xl mr-2">03.</span>
+        <span className="text-primary font-mono text-xl mr-2">04.</span>
         Professional Certifications
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

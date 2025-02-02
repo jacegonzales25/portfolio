@@ -42,7 +42,7 @@ export function Experience() {
 
   return (
     <section id="experience" className="py-20 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-bold mb-8">
+      <h2 className="text-3xl font-bold mb-8 text-gray-600">
         <span className="text-primary font-mono text-xl mr-2">02.</span>
         Where I&apos;ve Worked
       </h2>
@@ -69,14 +69,14 @@ export function Experience() {
           />
         </div>
         <div className="md:w-3/4">
-          <h3 className="text-xl font-semibold">{jobs[activeJobIndex].title}</h3>
+          <h3 className="text-xl font-semibold text-gray-600">{jobs[activeJobIndex].title}</h3>
           <p className="text-primary mb-4">{jobs[activeJobIndex].company}</p>
           <p className="text-sm text-muted-foreground mb-4">{jobs[activeJobIndex].date}</p>
           <ul className="space-y-4">
             {jobs[activeJobIndex].responsibilities.map((responsibility, index) => (
               <li key={index} className="flex">
                 <span className="text-primary mr-2">▹</span>
-                <span>{responsibility}</span>
+                <span className="text-gray-600">{responsibility}</span>
               </li>
             ))}
           </ul>

@@ -16,7 +16,7 @@ const projects: Project[] = [
     title: "Featured Project 1",
     description:
       "A comprehensive cloud-based solution utilizing AWS services including EC2, S3, and RDS. Implemented with Terraform for infrastructure management and GitHub Actions for CI/CD.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-hPFnBjHW4ACGKp5JW8KH8TlffNE1ba.png",
+    image: "",
     technologies: ["AWS", "Terraform", "GitHub Actions", "Node.js"],
     githubLink: "#",
     externalLink: "#",
@@ -25,7 +25,7 @@ const projects: Project[] = [
     title: "Halcyon Theme",
     description:
       "A minimal, dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Available on Visual Studio Marketplace, Package Control, Atom Package Manager, and npm.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-X450rnpkGWHoLBEgdykq1vjwDlLXPC.png",
+    image: "",
     technologies: ["VS Code", "Sublime Text", "Atom", "iTerm2", "Hyper"],
     githubLink: "#",
     externalLink: "#",
@@ -34,7 +34,7 @@ const projects: Project[] = [
     title: "Spotify Profile",
     description:
       "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-SYh0cx469PazG9SiQkMUunp0oGgzDa.png",
+    image: "",
     technologies: ["React", "Express", "Spotify API", "Heroku"],
     githubLink: "#",
     externalLink: "#",
