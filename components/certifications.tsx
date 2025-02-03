@@ -11,20 +11,29 @@ type Certification = {
 
 const certifications: Certification[] = [
   {
-    title: "Certified Kubernetes Application Developer",
-    issuer: "Cloud Native Computing Foundation (CNCF)",
+    title: "AWS Certified Solutions Architect - Associate",
+    issuer: "Amazon Web Services",
     description:
-      "Demonstrates expertise in designing, building, and deploying cloud-native applications using Kubernetes.",
-    date: "June 2023",
-    link: "https://www.cncf.io/certification/ckad/",
+      "Demonstrates the ability to design distributed systems on AWS, with a focus on high availability, fault tolerance, and cost optimization.",
+    date: "Issued in 2021",
+    link: "https://www.youracclaim.com/badges/5e1f7a9c-6f5e-4d1e-8f1a-7a0b5c9a8a1c/linked_in_profile",
   },
   {
-    title: "AWS Certified Solutions Architect - Associate",
-    issuer: "Amazon Web Services (AWS)",
-    description: "Proves competency in designing and deploying scalable and reliable applications on AWS.",
-    date: "March 2022",
-    link: "https://aws.amazon.com/certification/certified-solutions-architect/",
+    title: "AWS Certified Developer - Associate",
+    issuer: "Amazon Web Services",
+    description:
+      "Validates proficiency in developing, deploying, and debugging cloud-based applications using AWS services.",
+    date: "Issued in 2021",
+    link: "https://www.youracclaim.com/badges/5e1f7a9c-6f5e-4d1e-8f1a-7a0b5c9a8a1c/linked_in_profile",
   },
+  {
+    title: "AWS Certified SysOps Administrator - Associate",
+    issuer: "Amazon Web Services",
+    description:
+      "Confirms technical expertise in deploying, managing, and operating scalable, highly available, and fault-tolerant systems on AWS.",
+    date: "Issued in 2021",
+    link: "https://www.youracclaim.com/badges/5e1f7a9c-6f5e-4d1e-8f1a-7a0b5c9a8a1c/linked_in_profile",
+  }
   // Add more certifications here...
 ]
 
@@ -36,26 +45,34 @@ export function Certifications() {
         Professional Certifications
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {certifications.map((cert, index) => (
-          <div
-            key={cert.title}
-            className="bg-secondary/50 rounded-lg p-6 hover:-translate-y-2 transition-transform duration-200 animate-fade-up"
-            style={{ animationDelay: `${(index + 1) * 100}ms` }}
-          >
-            <div className="flex justify-between items-start mb-4">
-              <Folder className="h-10 w-10 text-primary" />
-              <Link href={cert.link} className="text-muted-foreground hover:text-primary">
-                <ExternalLink className="h-5 w-5" />
-              </Link>
-            </div>
-            <h3 className="text-xl font-semibold mb-2 text-gray-400">{cert.title}</h3>
-            <p className="text-primary mb-2">{cert.issuer}</p>
-            <p className="text-muted-foreground text-sm mb-4">{cert.description}</p>
-            <p className="text-sm text-muted-foreground">{cert.date}</p>
+        {certifications.length === 0 ? (
+          <div className="col-span-full flex flex-col items-center justify-center">
+            <h2 className="text-center text-3xl font-bold text-gray-900 mb-8 animate-fade-up">
+              Coming Soon...
+            </h2>
           </div>
-        ))}
+        ) : (
+          certifications.map((cert, index) => (
+            <div
+              key={cert.title}
+              className="bg-secondary/50 rounded-lg p-6 hover:-translate-y-2 transition-transform duration-200 animate-fade-up"
+              style={{ animationDelay: `${(index + 1) * 100}ms` }}
+            >
+              <div className="flex justify-between items-start mb-4">
+                <Folder className="h-10 w-10 text-primary" />
+                <Link href={cert.link} className="text-muted-foreground hover:text-primary">
+                  <ExternalLink className="h-5 w-5" />
+                </Link>
+              </div>
+              <h3 className="text-xl font-semibold mb-2 text-gray-400">{cert.title}</h3>
+              <p className="text-primary mb-2">{cert.issuer}</p>
+              <p className="text-muted-foreground text-sm mb-4">{cert.description}</p>
+              <p className="text-sm text-muted-foreground">{cert.date}</p>
+            </div>
+          ))
+        )}
       </div>
     </section>
-  )
+  );
 }
 

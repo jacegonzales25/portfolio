@@ -13,16 +13,18 @@ export function Contact() {
           Let&apos;s Build the Future Together
         </h3>{" "}
         <p className="text-muted-foreground mb-8">
-          I&apos;m a <span className="text-primary font-semibold">Cloud Engineer</span> and{" "}
-          <span className="text-primary font-semibold">DevOps Specialist</span> passionate about building scalable,
-          secure, and automated cloud infrastructure. Whether you&apos;re looking to optimize your cloud architecture,
-          implement Infrastructure as Code, or streamline CI/CD pipelines, I&apos;d love to collaborate.
+          I&apos;m a{" "}
+          <span className="text-primary font-semibold">Cloud Engineer</span> and{" "}
+          <span className="text-primary font-semibold">DevOps Specialist</span>{" "}
+          passionate about building scalable, secure, and automated cloud
+          infrastructure. Whether you&apos;re looking to optimize your cloud
+          architecture, implement Infrastructure as Code, or streamline CI/CD
+          pipelines, I&apos;d love to collaborate.
         </p>
         <Button asChild className="mb-32">
           <a href="mailto:jacegonzales25@gmail.com">Get in Touch</a>
         </Button>
       </div>
-
 
       <footer
         className="text-center text-muted-foreground text-sm animate-fade-up"

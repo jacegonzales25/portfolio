@@ -13,7 +13,7 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "Featured Project 1",
+    title: "Multi-tier Web Application Stack (VPROFILE)",
     description:
       "A comprehensive cloud-based solution utilizing AWS services including EC2, S3, and RDS. Implemented with Terraform for infrastructure management and GitHub Actions for CI/CD.",
     image: "",
@@ -46,7 +46,7 @@ export function Projects() {
     <section id="projects" className="py-20 max-w-6xl mx-auto">
       <h2 className="text-3xl font-bold mb-16 text-gray-600">
         <span className="text-primary font-mono text-xl mr-2">03.</span>
-        Some Things I&apos;ve Built
+        Some Things I&apos;ve Deployed
       </h2>
       <div className="space-y-32">
         {projects.map((project, index) => (
