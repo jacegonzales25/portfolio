@@ -3,44 +3,14 @@
 import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
-import { Project } from "@/types/types";
+import type { Project } from "@/types/types";
 import { useQuery } from "@tanstack/react-query";
+import { LoadingErrorState } from "@/components/loading-error-state";
+import { EmptyState } from "@/components/empty-state";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // Use environment variable
-
-// const projects: Project[] = [
-//   {
-//     title: "Multi-tier Web Application Stack (VPROFILE)",
-//     description:
-//       "A comprehensive cloud-based solution utilizing AWS services including EC2, S3, and RDS. Implemented with Terraform for infrastructure management and GitHub Actions for CI/CD.",
-//     image: "",
-//     technologies: ["AWS", "Terraform", "GitHub Actions", "Node.js"],
-//     githubLink: "#",
-//     externalLink: "#",
-//   },
-//   {
-//     title: "Halcyon Theme",
-//     description:
-//       "A minimal, dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Available on Visual Studio Marketplace, Package Control, Atom Package Manager, and npm.",
-//     image: "",
-//     technologies: ["VS Code", "Sublime Text", "Atom", "iTerm2", "Hyper"],
-//     githubLink: "#",
-//     externalLink: "#",
-//   },
-//   {
-//     title: "Spotify Profile",
-//     description:
-//       "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-//     image: "",
-//     technologies: ["React", "Express", "Spotify API", "Heroku"],
-//     githubLink: "#",
-//     externalLink: "#",
-//   },
-// ];
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 export function Projects() {
-  // Fetch data from API
-
   const {
     isPending,
     error,
@@ -49,14 +19,10 @@ export function Projects() {
     queryKey: ["projects"],
     queryFn: async () => {
       const res = await fetch(`${API_URL}/projects`);
-      const data = await res.json();
-      return data;
+      if (!res.ok) throw new Error("Failed to fetch projects");
+      return res.json();
     },
   });
-
-  if (isPending) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
 
   return (
     <section id="projects" className="py-20 max-w-6xl mx-auto">
@@ -64,78 +30,99 @@ export function Projects() {
         <span className="text-primary font-mono text-xl mr-2">03.</span>
         Some Things I&apos;ve Deployed
       </h2>
-      <div className="space-y-32">
-        {projects.map((project, index) => (
-          <div
-            key={project.title}
-            className={`relative flex items-center ${
-              index % 2 === 0 ? "flex-row" : "flex-row-reverse"
-            }`}
-          >
-            {/* Project Image */}
-            <div className="absolute w-full md:w-7/12 h-[300px] md:h-[400px] mx-[-6]">
-              <div className="relative w-full h-full">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  className="object-cover rounded"
-                />
-                <div className="absolute inset-0 bg-black/50 mix-blend-multiply rounded" />
-              </div>
-            </div>
+      <LoadingErrorState
+        isLoading={isPending}
+        error={error as Error | null}
+        loadingMessage="Loading projects..."
+        errorMessage="Failed to load projects. Please try again later."
+      />
+      {projects &&
+        (projects.length === 0 ? (
+          <EmptyState message="No projects to display yet. Check back soon!" />
+        ) : (
+          <div className="space-y-32">
+            {projects.map((project, index) => (
+              <div
+                key={project.id}
+                className={`relative flex items-center ${
+                  index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                }`}
+              >
+                {/* Project Image */}
+                <div className="absolute w-full md:w-7/12 h-[300px] md:h-[400px] mx-[-6]">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={project.image || "/placeholder.svg"}
+                      alt={project.title}
+                      fill
+                      className="object-cover rounded"
+                    />
+                    <div className="absolute inset-0 bg-black/50 mix-blend-multiply rounded" />
+                  </div>
+                </div>
 
-            {/* Project Content */}
-            <div
-              className={`relative w-full md:w-5/12 ${
-                index % 2 === 0 ? "ml-auto" : "mr-auto"
-              } z-10`}
-            >
-              <div className={`text-right ${index % 2 === 1 && "text-left"}`}>
-                <p className="text-primary font-mono mb-2">Featured Project</p>
-                <h3 className="text-2xl font-bold mb-4 text-gray-400">
-                  {project.title}
-                </h3>
-                <div className="bg-card p-6 rounded-lg mb-4 shadow-lg">
-                  <p className="text-gray-600">{project.description}</p>
-                </div>
-                <ul
-                  className={`flex flex-wrap gap-4 mb-4 ${
-                    index % 2 === 0 ? "justify-end" : "justify-start"
-                  }`}
-                >
-                  {project.technologies.map((tech) => (
-                    <li
-                      key={tech.id}
-                      className="font-mono text-sm text-gray-900"
-                    >
-                      {tech.name}
-                    </li>
-                  ))}
-                </ul>
+                {/* Project Content */}
                 <div
-                  className={`flex gap-4 ${
-                    index % 2 === 0 ? "justify-end" : "justify-start"
-                  }`}
+                  className={`relative w-full md:w-5/12 ${
+                    index % 2 === 0 ? "ml-auto" : "mr-auto"
+                  } z-10`}
                 >
-                  <Link
-                    href={project.githubLink}
-                    className="text-gray-400 hover:text-gray-900 transition-colors"
+                  <div
+                    className={`text-right ${index % 2 === 1 && "text-left"}`}
                   >
-                    <Github className="h-5 w-5" />
-                  </Link>
-                  <Link
-                    href={project.externalLink || "#"}
-                    className="text-gray-400 hover:text-gray-900 transition-colors"
-                  >
-                    <ExternalLink className="h-5 w-5" />
-                  </Link>
+                    <p className="text-primary font-mono mb-2">
+                      Featured Project
+                    </p>
+                    <h3 className="text-2xl font-bold mb-4 text-gray-400">
+                      {project.title}
+                    </h3>
+                    <div className="bg-card p-6 rounded-lg mb-4 shadow-lg">
+                      <p className="text-gray-600">{project.description}</p>
+                    </div>
+                    <ul
+                      className={`flex flex-wrap gap-4 mb-4 ${
+                        index % 2 === 0 ? "justify-end" : "justify-start"
+                      }`}
+                    >
+                      {project.technologies.map((tech) => (
+                        <li
+                          key={tech.id}
+                          className="font-mono text-sm text-gray-900"
+                        >
+                          {tech.name}
+                        </li>
+                      ))}
+                    </ul>
+                    <div
+                      className={`flex gap-4 ${
+                        index % 2 === 0 ? "justify-end" : "justify-start"
+                      }`}
+                    >
+                      <Link
+                        href={project.githubLink}
+                        className="text-gray-400 hover:text-gray-900 transition-colors"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <Github className="h-5 w-5" />
+                      </Link>
+                      {project.externalLink && (
+                        <Link
+                          href={project.externalLink}
+                          className="text-gray-400 hover:text-gray-900 transition-colors"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="h-5 w-5" />
+                        </Link>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         ))}
-      </div>
     </section>
   );
 }
