@@ -31,7 +31,7 @@ export function About() {
           <div className="relative group">
             <div className="relative z-10 bg-secondary rounded">
               <Image
-                src="s3://resume-portfolio-assets/uploads/profile.jpeg"
+                src="https://resume-portfolio-assets.s3.us-east-1.amazonaws.com/uploads/profile.jpeg"
                 alt="Profile"
                 width={300}
                 height={300}

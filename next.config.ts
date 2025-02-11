@@ -5,10 +5,9 @@ const nextConfig: NextConfig = {
       remotePatterns: [
         {
           protocol: 'https',
-          hostname: 'assets.example.com',
+          hostname: 'resume-portfolio-assets.s3.us-east-1.amazonaws.com',
           port: '',
-          pathname: '/account123/**',
-          search: '',
+          pathname: '/**',
         },
       ],
     },
