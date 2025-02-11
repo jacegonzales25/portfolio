@@ -1,13 +1,18 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel"
-import { Card, CardContent } from "@/components/ui/card"
-import { TechnologyCategory, Technology } from "@/types/types"
-
+import { useEffect, useState } from "react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { Card, CardContent } from "@/components/ui/card";
+import { TechnologyCategory } from "@/types/types";
+import { useQuery } from "@tanstack/react-query";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // Use environment variable
-
 
 // const technologies = {
 //   "Cloud Platforms": [
@@ -30,64 +35,56 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // U
 //   Databases: ["PostgreSQL", "MySQL", "MongoDB", "Firebase", "AWS RDS", "Elastic Cache (Memcached)"],
 //   Hosting: ["AWS", "GoDaddy"],
 // }
-
 export function TechCarousel() {
-  const [technologies, setTechnologies] = useState<Record<string, string[]>>({})
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [api, setApi] = useState<any>()
+  const [api, setApi] = useState<any>(null);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [current, setCurrent] = useState(0)
- // Fetch data from API
- useEffect(() => {
-  const fetchTechnologies = async () => {
-    try {
-      const res = await fetch(`${API_URL}/technology-categories`)
-      if (!res.ok) throw new Error("Failed to fetch technologies")
-      const data = await res.json()
+  const [current, setCurrent] = useState(0);
 
-      // Transform API data into the required format
-      const formattedTechnologies: Record<string, string[]> = {}
-      data.forEach((category: TechnologyCategory) => {
-        formattedTechnologies[category.name] = category.technologies.map((tech: Technology) => tech.name)
-      })
+  const {
+    isPending,
+    error,
+    data: technologyCategories,
+  } = useQuery<TechnologyCategory[]>({
+    queryKey: ["technologies"],
+    queryFn: async () => {
+      const res = await fetch(`${API_URL}/technologies`);
+      if (!res.ok) throw new Error("Failed to fetch technologies");
+      return res.json();
+    },
+  });
 
-      setTechnologies(formattedTechnologies)
-    } catch (error) {
-      console.error("Error fetching technologies:", error)
-    }
-  }
+  useEffect(() => {
+    if (!api) return;
+    api.on("select", () => setCurrent(api.selectedScrollSnap()));
+  }, [api]);
 
-  fetchTechnologies()
-}, [])
-
-useEffect(() => {
-  if (!api) return
-  api.on("select", () => {
-    setCurrent(api.selectedScrollSnap())
-  })
-}, [api])
+  if (isPending) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="w-full">
       <Carousel
         setApi={setApi}
         className="w-full max-w-lg mx-auto"
-        opts={{
-          align: "start",
-          loop: true,
-        }}
+        opts={{ align: "start", loop: true }}
       >
         <CarouselContent>
-          {Object.entries(technologies).map(([category, techs]) => (
-            <CarouselItem key={category} className="md:basis-1/2 lg:basis-1/3">
+          {technologyCategories.map((category) => (
+            <CarouselItem
+              key={category.id}
+              className="md:basis-1/2 lg:basis-1/3"
+            >
               <Card className="bg-card/50 backdrop-blur-sm">
                 <CardContent className="p-6">
-                  <h4 className="text-primary font-mono mb-4">{category}</h4>
+                  <h4 className="text-primary font-mono mb-4">
+                    {category.name}
+                  </h4>
                   <ul className="space-y-2">
-                    {techs.map((tech) => (
-                      <li key={tech} className="flex items-center gap-2">
+                    {category.technologies.map((tech) => (
+                      <li key={tech.id} className="flex items-center gap-2">
                         <span className="text-primary">▹</span>
-                        {tech}
+                        {tech.name}
                       </li>
                     ))}
                   </ul>
@@ -100,6 +97,5 @@ useEffect(() => {
         <CarouselNext />
       </Carousel>
     </div>
-  )
+  );
 }
-

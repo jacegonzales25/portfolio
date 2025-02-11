@@ -1,47 +1,63 @@
+"use client";
+
 import Image from "next/image";
 import { Github, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { Project } from "@/types/types";
+import { useQuery } from "@tanstack/react-query";
 
-type Project = {
-  title: string;
-  description: string;
-  image: string;
-  technologies: string[];
-  githubLink: string;
-  externalLink: string;
-};
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000"; // Use environment variable
 
-const projects: Project[] = [
-  {
-    title: "Multi-tier Web Application Stack (VPROFILE)",
-    description:
-      "A comprehensive cloud-based solution utilizing AWS services including EC2, S3, and RDS. Implemented with Terraform for infrastructure management and GitHub Actions for CI/CD.",
-    image: "",
-    technologies: ["AWS", "Terraform", "GitHub Actions", "Node.js"],
-    githubLink: "#",
-    externalLink: "#",
-  },
-  {
-    title: "Halcyon Theme",
-    description:
-      "A minimal, dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Available on Visual Studio Marketplace, Package Control, Atom Package Manager, and npm.",
-    image: "",
-    technologies: ["VS Code", "Sublime Text", "Atom", "iTerm2", "Hyper"],
-    githubLink: "#",
-    externalLink: "#",
-  },
-  {
-    title: "Spotify Profile",
-    description:
-      "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
-    image: "",
-    technologies: ["React", "Express", "Spotify API", "Heroku"],
-    githubLink: "#",
-    externalLink: "#",
-  },
-];
+// const projects: Project[] = [
+//   {
+//     title: "Multi-tier Web Application Stack (VPROFILE)",
+//     description:
+//       "A comprehensive cloud-based solution utilizing AWS services including EC2, S3, and RDS. Implemented with Terraform for infrastructure management and GitHub Actions for CI/CD.",
+//     image: "",
+//     technologies: ["AWS", "Terraform", "GitHub Actions", "Node.js"],
+//     githubLink: "#",
+//     externalLink: "#",
+//   },
+//   {
+//     title: "Halcyon Theme",
+//     description:
+//       "A minimal, dark blue theme for VS Code, Sublime Text, Atom, iTerm, and more. Available on Visual Studio Marketplace, Package Control, Atom Package Manager, and npm.",
+//     image: "",
+//     technologies: ["VS Code", "Sublime Text", "Atom", "iTerm2", "Hyper"],
+//     githubLink: "#",
+//     externalLink: "#",
+//   },
+//   {
+//     title: "Spotify Profile",
+//     description:
+//       "A web app for visualizing personalized Spotify data. View your top artists, top tracks, recently played tracks, and detailed audio information about each track. Create and save new playlists of recommended tracks based on your existing playlists and more.",
+//     image: "",
+//     technologies: ["React", "Express", "Spotify API", "Heroku"],
+//     githubLink: "#",
+//     externalLink: "#",
+//   },
+// ];
 
 export function Projects() {
+  // Fetch data from API
+
+  const {
+    isPending,
+    error,
+    data: projects,
+  } = useQuery<Project[]>({
+    queryKey: ["projects"],
+    queryFn: async () => {
+      const res = await fetch(`${API_URL}/projects`);
+      const data = await res.json();
+      return data;
+    },
+  });
+
+  if (isPending) return "Loading...";
+
+  if (error) return "An error has occurred: " + error.message;
+
   return (
     <section id="projects" className="py-20 max-w-6xl mx-auto">
       <h2 className="text-3xl font-bold mb-16 text-gray-600">
@@ -89,8 +105,11 @@ export function Projects() {
                   }`}
                 >
                   {project.technologies.map((tech) => (
-                    <li key={tech} className="font-mono text-sm text-gray-900">
-                      {tech}
+                    <li
+                      key={tech.id}
+                      className="font-mono text-sm text-gray-900"
+                    >
+                      {tech.name}
                     </li>
                   ))}
                 </ul>
@@ -106,7 +125,7 @@ export function Projects() {
                     <Github className="h-5 w-5" />
                   </Link>
                   <Link
-                    href={project.externalLink}
+                    href={project.externalLink || "#"}
                     className="text-gray-400 hover:text-gray-900 transition-colors"
                   >
                     <ExternalLink className="h-5 w-5" />
