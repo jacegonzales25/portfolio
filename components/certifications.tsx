@@ -1,6 +1,7 @@
 import { Folder, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
+
 type Certification = {
   title: string
   issuer: string
@@ -39,7 +40,7 @@ const certifications: Certification[] = [
 
 export function Certifications() {
   return (
-    <section className="py-20 max-w-4xl mx-auto">
+    <section id="certifications" className="py-20 max-w-4xl mx-auto">
       <h2 className="text-center text-3xl font-bold text-gray-600 mb-8 animate-fade-up">
         <span className="text-primary font-mono text-xl mr-2">04.</span>
         Professional Certifications
