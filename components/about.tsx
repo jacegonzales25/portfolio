@@ -19,8 +19,7 @@ export function About() {
           <p className="text-gray-600">
             Today, I specialize in designing and implementing cloud solutions,
             with a focus on AWS services, containerization, and Infrastructure
-            as Code. I&apos;m particularly interested in creating efficient CI/CD
-            pipelines and automated deployment processes.
+            as Code. I&apos;m particularly interested in provisioning infrastructure and automated deployment processes.
           </p>
           <div className="mt-12">
             <h3 className="text-xl font-bold mb-6 text-gray-600">Technical Skills</h3>

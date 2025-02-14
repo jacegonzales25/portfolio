@@ -26,7 +26,7 @@ export function Projects() {
 
   return (
     <section id="projects" className="py-20 max-w-6xl mx-auto">
-      <h2 className="text-3xl font-bold mb-12">
+      <h2 className="text-3xl font-bold mb-12 text-gray-600">
         <span className="text-primary font-mono text-xl mr-2">03.</span>
         Some Things I&apos;ve Built
       </h2>
@@ -79,10 +79,10 @@ export function Projects() {
                     <p className="text-primary font-mono mb-2">
                       Featured Project
                     </p>
-                    <h3 className="text-2xl font-bold mb-4">
+                    <h3 className="text-2xl font-bold mb-4 text-gray-400">
                       {project.title}
                     </h3>
-                    <div className="bg-card p-6 rounded-lg mb-4 shadow-lg">
+                    <div className="bg-card p-6 rounded-lg mb-4 shadow-lg tex-gray-600">
                       <p>{project.description}</p>
                     </div>
                     <ul
@@ -91,7 +91,7 @@ export function Projects() {
                       }`}
                     >
                       {project.technologies.map((tech) => (
-                        <li key={tech.id} className="font-mono text-sm">
+                        <li key={tech.id} className="font-mono text-sm text-gray-200">
                           {tech.name}
                         </li>
                       ))}
