@@ -7,7 +7,6 @@ import { useQuery } from "@tanstack/react-query"
 import { LoadingErrorState } from "@/components/loading-error-state"
 import { EmptyState } from "@/components/empty-state"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080"
 
 export function Certifications() {
   const {
@@ -17,7 +16,8 @@ export function Certifications() {
   } = useQuery<Certification[]>({
     queryKey: ["certifications"],
     queryFn: async () => {
-      const res = await fetch(`${API_URL}/certifications`)
+      const res = await fetch(`/certifications`)
+      if (!res.ok) throw new Error("Failed to fetch certifications")
       return res.json()
     },
   })

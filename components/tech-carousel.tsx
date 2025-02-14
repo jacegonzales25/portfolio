@@ -6,8 +6,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import type { TechnologyCategory } from "@/types/types"
 import { useQuery } from "@tanstack/react-query"
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080"
-
 export function TechCarousel() {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [api, setApi] = useState<any>(null)
@@ -20,7 +18,7 @@ export function TechCarousel() {
   } = useQuery<TechnologyCategory[]>({
     queryKey: ["technologies"],
     queryFn: async () => {
-      const res = await fetch(`${API_URL}/technologies`)
+      const res = await fetch(`/technologies`)
       if (!res.ok) throw new Error("Failed to fetch technologies")
       return res.json()
     },
