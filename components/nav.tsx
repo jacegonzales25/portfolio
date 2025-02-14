@@ -54,8 +54,8 @@ export function Nav() {
                   {item.name}
                 </Link>
               ))}
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary/10">
-                <Link href={"https://resume-portfolio-assets.s3.us-east-1.amazonaws.com/uploads/Functional+Resume+-+Jace+L+Gonzales+.pdf"}>Resume</Link>
+              <Button variant="link" className="border-primary text-primary hover:bg-primary/10">
+                <a href={"https://resume-portfolio-assets.s3.us-east-1.amazonaws.com/uploads/files/Functional+Resume+-+Jace+L+Gonzales.pdf"} download>Resume</a>
               </Button>
             </div>
           </div>
