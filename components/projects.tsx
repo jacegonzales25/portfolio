@@ -79,10 +79,10 @@ export function Projects() {
                     <p className="text-primary font-mono mb-2">
                       Featured Project
                     </p>
-                    <h3 className="text-2xl font-bold mb-4 text-gray-400">
+                    <h3 className="text-2xl font-bold mb-4 text-gray-900">
                       {project.title}
                     </h3>
-                    <div className="bg-card p-6 rounded-lg mb-4 shadow-lg tex-gray-600">
+                    <div className="bg-card p-6 rounded-lg mb-4 shadow-lg tex-gray-700">
                       <p>{project.description}</p>
                     </div>
                     <ul
@@ -91,7 +91,7 @@ export function Projects() {
                       }`}
                     >
                       {project.technologies.map((tech) => (
-                        <li key={tech.id} className="font-mono text-sm text-gray-200">
+                        <li key={tech.id} className="font-mono text-sm text-gray-900">
                           {tech.name}
                         </li>
                       ))}
