@@ -16,7 +16,7 @@ export function Certifications() {
   } = useQuery<Certification[]>({
     queryKey: ["certifications"],
     queryFn: async () => {
-      const res = await fetch(`/api/certifications`)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/certifications`)
       if (!res.ok) throw new Error("Failed to fetch certifications")
       return res.json()
     },

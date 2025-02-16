@@ -18,7 +18,7 @@ export function Projects() {
   } = useQuery<Project[]>({
     queryKey: ["projects"],
     queryFn: async () => {
-      const res = await fetch("/api/projects")
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects`)
       if (!res.ok) throw new Error("Failed to fetch projects")
       return res.json()
     },

@@ -18,7 +18,7 @@ export function TechCarousel() {
   } = useQuery<TechnologyCategory[]>({
     queryKey: ["technologies"],
     queryFn: async () => {
-      const res = await fetch(`/api/technology-categories`)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/technology-categories`)
       if (!res.ok) throw new Error("Failed to fetch technologies")
       return res.json()
     },

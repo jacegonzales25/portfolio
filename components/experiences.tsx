@@ -19,7 +19,7 @@ export function Experiences() {
     queryKey: ["jobs"],
     queryFn: async () => {
       // remove slash and direct the route
-      const res = await fetch(`/api/experiences`)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/experiences`)
       if (!res.ok) throw new Error("Failed to fetch experiences")
       return res.json()
     },
